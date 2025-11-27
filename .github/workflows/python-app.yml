@@ -2,7 +2,7 @@ name: ScriptRunner
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
   schedule:
     - cron: "*/15 * * * *"  
 permissions:
