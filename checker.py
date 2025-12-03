@@ -2,6 +2,8 @@
 import json
 import logging
 import os
+import random
+import time
 
 import git
 import httpx
@@ -40,6 +42,10 @@ def main():
             if run['status'] == 'completed':
                 # 重新触发Actions
                 logger.info(f'仓库 {repo} 完成, 重新触发Actions')
+                # 生产冷却时间 1min - 3min
+                rd_time = random.randint(60, 180)
+                logger.info(f'仓库 {repo} 冷却时间 {rd_time} 秒')
+                time.sleep(rd_time)
                 git.Repo('.').remote(name).push(force=True)
     logger.info('检查完成')
 
